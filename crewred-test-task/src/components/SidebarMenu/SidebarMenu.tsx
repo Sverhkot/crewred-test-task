@@ -12,7 +12,6 @@ export interface SidebarMenuProps {
   onClose: () => void;
   items: MenuItem[];
   title?: string;
-  logo?: React.ReactNode;
 }
 
 const NavItem: React.FC<{ item: MenuItem; depth?: number }> = ({ item, depth = 0 }) => {
@@ -22,8 +21,12 @@ const NavItem: React.FC<{ item: MenuItem; depth?: number }> = ({ item, depth = 0
   return (
     <div className="w-full font-sans">
       <div
-        className={`flex items-center justify-between px-5 py-3 cursor-pointer transition-colors duration-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900 ${isExpanded ? 'text-slate-900 font-medium' : ''
-          }`}
+        className={`
+          flex items-center justify-between px-5 py-3 cursor-pointer
+          text-slate-600 hover:bg-slate-100 hover:text-slate-900
+          transition-colors duration-200
+          ${isExpanded ? 'text-slate-900 font-medium' : ''}
+        `}
         style={{ paddingLeft: depth === 0 ? '1.25rem' : `${(depth * 1.5) + 3}rem` }}
         onClick={() => hasChildren && setIsExpanded(!isExpanded)}
       >
@@ -40,16 +43,21 @@ const NavItem: React.FC<{ item: MenuItem; depth?: number }> = ({ item, depth = 0
 
         {hasChildren && (
           <span
-            className={`text-[10px] text-slate-400 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''
-              }`}
+            className={`
+              text-[10px] text-slate-400
+              transition-transform duration-300
+              ${isExpanded ? 'rotate-180' : ''}
+            `}
           >
             ▼
           </span>
         )}
       </div>
       <div
-        className={`grid transition-all duration-300 ease-in-out ${isExpanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
-          }`}
+        className={`
+          grid transition-all duration-300 ease-in-out
+          ${isExpanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}
+        `}
       >
         <div className="overflow-hidden bg-slate-50/50">
           {item.children?.map((child, index) => (
@@ -66,24 +74,29 @@ export const SidebarMenu: React.FC<SidebarMenuProps> = ({
   onClose,
   items,
   title = 'Pro Sidebar',
-  logo,
 }) => {
   return (
     <>
       <div
-        className={`fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 transition-opacity duration-300 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-          }`}
+        className={`
+          fixed inset-0 z-40 bg-slate-900/50 backdrop-blur-sm
+          transition-opacity duration-300
+          ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}
+        `}
         onClick={onClose}
         aria-hidden="true"
       />
 
       <div
-        className={`fixed top-0 right-0 h-full w-[280px] bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-out flex flex-col ${isOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
+        className={`
+          fixed top-0 right-0 z-50 h-full w-[280px]
+          flex flex-col bg-white shadow-2xl
+          transform transition-transform duration-300 ease-out
+          ${isOpen ? 'translate-x-0' : 'translate-x-full'}
+        `}
       >
         <div className="flex items-center justify-between p-6 border-b border-slate-100">
           <div className="flex items-center gap-3">
-            {logo && <div className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold">{logo}</div>}
             <h2 className="text-lg font-bold text-slate-800 tracking-tight">{title}</h2>
           </div>
           <button

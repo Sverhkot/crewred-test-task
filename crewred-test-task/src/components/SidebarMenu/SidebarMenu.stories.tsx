@@ -9,6 +9,9 @@ const meta = {
     layout: 'fullscreen',
   },
   tags: ['autodocs'],
+  argTypes: {
+    items: { control: false },
+  },
 } satisfies Meta<typeof SidebarMenu>;
 
 export default meta;
@@ -65,7 +68,6 @@ export const NestedMenu: Story = {
   render: (args) => <SidebarWrapper {...args} />,
   args: {
     title: 'Pro UI',
-    logo: 'P',
     items: nestedMenuData,
   },
 };

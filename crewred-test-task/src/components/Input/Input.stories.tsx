@@ -11,7 +11,7 @@ const meta = {
   argTypes: {
     type: {
       control: 'select',
-      options: ['text', 'password', 'email', 'number', 'search', 'tel', 'url'],
+      options: ['text', 'password', 'number', 'search'],
       description: 'The type of input field',
     },
   },
@@ -24,6 +24,7 @@ const InputWithState = (args: any) => {
   const [value, setValue] = useState(args.value || '');
   return (
     <Input
+      key={args.type}
       {...args}
       value={value}
       onChange={(e) => setValue(e.target.value)}
@@ -36,7 +37,7 @@ export const DefaultText: Story = {
   render: (args) => <InputWithState {...args} />,
   args: {
     type: 'text',
-    placeholder: 'Enter your name...',
+    placeholder: 'Enter your text...',
   },
 };
 
@@ -60,10 +61,18 @@ export const Clearable: Story = {
 export const WithError: Story = {
   render: (args) => <InputWithState {...args} />,
   args: {
-    type: 'email',
-    placeholder: 'Enter your email...',
-    value: 'not an email',
-    error: 'Please enter a valid email address.',
+    type: 'text',
+    placeholder: 'Enter your name...',
+    value: 'invalid value',
+    error: 'This field contains an error.',
+  },
+};
+
+export const Search: Story = {
+  render: (args) => <InputWithState {...args} />,
+  args: {
+    type: 'search',
+    placeholder: 'Search...',
   },
 };
 

@@ -21,9 +21,7 @@ export const Toast: React.FC<ToastProps> = ({
 }) => {
 
   const [isRendered, setIsRendered] = useState(isOpen);
-
   const [isVisible, setIsVisible] = useState(false);
-
 
   useEffect(() => {
     if (isOpen) {
@@ -55,16 +53,23 @@ export const Toast: React.FC<ToastProps> = ({
 
   return (
     <div
-      className={`fixed bottom-4 right-4 z-50 flex items-center p-4 min-w-[300px] border rounded-lg shadow-lg transition-all duration-300 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-        } ${typeStyles[type]}`}
-      style={{ backgroundColor: backgroundColor }}
+      className={`
+        fixed bottom-4 right-4 z-50
+        flex items-center p-4 min-w-[300px]
+        border rounded-lg shadow-lg
+        transition-all duration-300 transform
+        ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}
+        ${typeStyles[type]}
+      `}
+      style={{ backgroundColor }}
       role="alert"
     >
       <div className="text-sm font-medium flex-1">{message}</div>
       {showCloseButton && (
         <button
           onClick={onClose}
-          className="ml-4 opacity-70 hover:opacity-100 focus:outline-none transition-opacity"
+          className="ml-4 opacity-70 hover:opacity-100
+            transition-opacity focus:outline-none"
           aria-label="Close"
         >
           ✕
